@@ -62,7 +62,7 @@ CLASSES
 class App(CTk):
     def __init__(self) -> None:
         super().__init__()
-        self.title("PDF Merger")
+        self.title("PDFMergeXpress")
         self.geometry("900x420")
         self.resizable(False, False)
 
