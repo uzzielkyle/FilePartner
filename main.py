@@ -1,4 +1,9 @@
-# Disclaimer: The way I wrote this code was to somehow make it 'work'... I had no prior experience nor knowledge in app/software development. Feel free to give constructive feedbacks :)
+'''
+Disclaimer: 
+The way I wrote this code was to somehow make it 'work'... 
+I had no prior experience nor knowledge in app/software development. 
+Constructive feedbacks are very much appreciated :)
+'''
 from PyPDF2 import PdfMerger
 import glob
 import os
