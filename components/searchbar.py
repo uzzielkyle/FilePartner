@@ -1,9 +1,9 @@
 from typing import Tuple
-from customtkinter import CTk, CTkFrame, CTkLabel, CTkEntry, CTkButton
+from customtkinter import CTk, CTkFrame, CTkLabel, CTkEntry, CTkButton, filedialog
 
 class Searchbar(CTkFrame):
     def __init__(self, *args, 
-                 label: str = '',
+                 label: str = 'Search',
                  width: int = 200, 
                  height: int = 50, 
                  bg_color: str | Tuple[str, str] = "transparent", 
@@ -20,12 +20,18 @@ class Searchbar(CTkFrame):
         self.entry.grid(row=0, column=1, padx=10, pady=5, stick='ew')
         self.entry.bind('<Return>', self.bind_callback)
         
-        self.load_btn = CTkButton(self, text="Load", width=(2*height)-10)
+        self.load_btn = CTkButton(self, text="Load", width=(2*height)-10, command=self.load)
         self.load_btn.grid(row=0, column=2, padx=(0, 10), pady=5)
         
     def bind_callback(self, event):
         self.focus()
         print(self.get())
+        
+    def load(self):
+        folder_path = filedialog.askdirectory()
+        
+        self.entry.delete(0, 'end')
+        self.entry.insert(0, folder_path)
         
     def get(self) -> str:
         return self.entry.get()
@@ -41,7 +47,7 @@ class App(CTk):
         
         self.grid_columnconfigure(0, weight=1)
         
-        self.searchbar = Searchbar(master=self, label='Search Folder:', width=500)
+        self.searchbar = Searchbar(master=self, label='Search Folder:', width=750)
         self.searchbar.grid(row=0, column=0, padx=10, pady=10)
         
         
