@@ -1,14 +1,16 @@
 from typing import Tuple
-from customtkinter import CTk, CTkFrame, CTkLabel, CTkEntry, CTkButton, filedialog
+from customtkinter import *
 
 class Searchbar(CTkFrame):
     def __init__(self, *args, 
-                 label: str = 'Search',
+                 label: str = 'Search Folder',
+                 placeholder_text: str = 'Folder Path',
                  width: int = 200, 
                  height: int = 50, 
                  bg_color: str | Tuple[str, str] = "transparent", 
+                 corner_radius: int = 0,
                  **kwargs):
-        super().__init__(*args, width=width, height=height, bg_color=bg_color, **kwargs)
+        super().__init__(*args, width=width, height=height, bg_color=bg_color, corner_radius=corner_radius, **kwargs)
               
         self.grid_columnconfigure((0, 2), weight=0)
         self.grid_columnconfigure(1, weight=1)
@@ -16,7 +18,7 @@ class Searchbar(CTkFrame):
         self.lbl_search = CTkLabel(self, text=label)
         self.lbl_search.grid(row=0, column=0, padx=(10, 0), pady=5)
         
-        self.entry = CTkEntry(self, placeholder_text='Folder path', width=(width // 2))
+        self.entry = CTkEntry(self, placeholder_text=placeholder_text, width=(width // 2))
         self.entry.grid(row=0, column=1, padx=10, pady=5, stick='ew')
         self.entry.bind('<Return>', self.bind_callback)
         
@@ -41,18 +43,18 @@ class Searchbar(CTkFrame):
         self.entry.insert(0, folder_path)
         
         
-class App(CTk):
+class Tester(CTk):
     def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
         super().__init__(fg_color, **kwargs)
         
         self.grid_columnconfigure(0, weight=1)
         
-        self.searchbar = Searchbar(master=self, label='Search Folder:', width=750)
+        self.searchbar = Searchbar(master=self, width=750)
         self.searchbar.grid(row=0, column=0, padx=10, pady=10)
         
         
 def main():
-    app = App()
+    app = Tester()
     
     app.mainloop()
     
