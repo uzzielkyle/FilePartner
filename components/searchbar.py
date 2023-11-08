@@ -49,29 +49,22 @@ class Searchbar(CTkFrame):
         self.entry.delete(0, 'end')
         self.entry.configure(placeholder_text='Folder Path')
         
-        
-class Tester(CTk):
-    def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-        super().__init__(fg_color, **kwargs)
-        
-        self.grid_columnconfigure(0, weight=1)
-    
-        self.head_frame = CTkFrame(self, fg_color='whitesmoke', corner_radius=0)
-        self.head_frame.grid(row=0, column=0)
-        
-        self.searchbar = Searchbar(master=self.head_frame, width=700)
-        self.searchbar.grid(row=0, column=0, padx=10, pady=(10, 0))
-        
-        # self.merger = Merger(master=self.head_frame, width=700)
-        # self.merger.grid(row=1, column=0, padx=10, pady=(0, 10))
-        
-        
-def main():
-    app = Tester()
-    
-    app.mainloop()
-    
 
 if __name__ == '__main__':
-    main()
-    
+    class Tester(CTk):
+        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
+            super().__init__(fg_color, **kwargs)
+            
+            self.grid_columnconfigure(0, weight=1)
+        
+            self.head_frame = CTkFrame(self, fg_color='whitesmoke', corner_radius=0)
+            self.head_frame.grid(row=0, column=0)
+            
+            self.searchbar = Searchbar(master=self.head_frame, width=700)
+            self.searchbar.grid(row=0, column=0, padx=10, pady=(10, 0))
+                    
+            
+    app = Tester()
+
+    app.mainloop()   
+     

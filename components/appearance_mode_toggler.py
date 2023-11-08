@@ -17,8 +17,8 @@ class AppearanceModeToggler(CTkFrame):
         
         self.current_mode_var = StringVar(value='System')
         
-        self.widget_label = CTkLabel(self, text='Appearance Mode')
-        self.widget_label.grid(row=0, column=0, padx=15, pady=0, sticky='w')
+        self.widget_label = CTkLabel(self, text='Appearance Mode', anchor='center')
+        self.widget_label.grid(row=0, column=0, padx=15, pady=0)
         
         self.dropdown_menu = CTkOptionMenu(self, values=self.modes_list, variable=self.current_mode_var, command=self.set)
         self.dropdown_menu.grid(row=1, column=0, padx=10, pady=(0, 5), sticky='ew')
@@ -34,25 +34,18 @@ class AppearanceModeToggler(CTkFrame):
         print(self.dropdown_menu.get())
     
 
-class Tester(CTk):
-    def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-        super().__init__(fg_color, **kwargs)
-                
-        self.grid_columnconfigure(0, weight=1)
-        
-        self.appearance_mode_toggler = AppearanceModeToggler(master=self)
-        self.appearance_mode_toggler.grid(row=0, column=0, padx=10, pady=10)
-        
-        self.button = CTkButton(self, text='Print Value', command=self.appearance_mode_toggler.get)
-        self.button.grid(row=1, column=0, padx=0, pady=10)
+if __name__ == '__main__':
+    class Tester(CTk):
+        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
+            super().__init__(fg_color, **kwargs)
+                    
+            self.grid_columnconfigure(0, weight=1)
+            
+            self.appearance_mode_toggler = AppearanceModeToggler(master=self)
+            self.appearance_mode_toggler.grid(row=0, column=0, padx=10, pady=10)
         
         
-def main():
     app = Tester()
     
     app.mainloop()
-    
-
-if __name__ == '__main__':
-    main()
     
