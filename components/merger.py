@@ -33,6 +33,7 @@ class Merger(CTkFrame):
         self.progress_bar.grid(row=0, column=0, columnspan=2, padx=0, pady=(0, 5), sticky='ew')
         self.progress_bar.configure(mode='indeterminate')
         
+        # self.merge_btn = CTkButton(self, text='Merge', width=90, corner_radius=corner_radius, command=lambda: self.merge())
         self.merge_btn = CTkButton(self, text='Merge', width=90, corner_radius=corner_radius, command=lambda: Thread(target=self.merge).start())
         self.merge_btn.grid(row=0, column=2, padx=(20, 0), pady=(0, 5), sticky='ew')
                

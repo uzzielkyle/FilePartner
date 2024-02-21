@@ -136,9 +136,9 @@ class LogicHandler:
         list_roots = []
 
         for (root, dirs, files) in os.walk(folder_path, topdown=True):
-            if any(f.endswith('.pdf') for f in files):
+            if any(f.endswith('.pdf') or f.endswith('.PDF') for f in files):
                 list_roots.append(root)
-
+        
         return list_roots
 
     # This ugly function is made by me
@@ -148,7 +148,6 @@ class LogicHandler:
         for folder in dirs:
             str_path = os.path.join(folder, '*.pdf') # Use os.path.join for paths
             pdfs = [path for path in glob.glob(str_path, recursive=True) if os.path.isfile(path) and not os.path.basename(path).startswith('output')]       
-            
             
             number_of_pages = self.merge_pdf(pdfs, os.path.join(folder, 'output.pdf'))
         
