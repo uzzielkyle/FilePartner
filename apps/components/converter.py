@@ -1,7 +1,7 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
 from utils.docx_to_pdf import DocxConverter
-from utils.logics import LogicHandler
+from utils.pdf_merger import LogicHandler
 from CTkMessagebox import CTkMessagebox
 from threading import Thread
 import os
@@ -97,18 +97,3 @@ class Converter(CTkFrame):
     def working_state(self):
         self.progress_bar.start()
         self.merge_btn.configure(state='disabled')
-
-
-if __name__ == '__main__':
-    class Tester(CTk):
-        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-            super().__init__(fg_color, **kwargs)
-
-            self.grid_columnconfigure(0, weight=1)
-
-            self.Converter = Converter(master=self, width=750)
-            self.Converter.grid(row=0, column=0, padx=10, pady=10)
-
-    app = Tester()
-
-    app.mainloop()

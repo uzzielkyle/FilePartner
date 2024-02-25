@@ -16,4 +16,4 @@ From that we now also have our conventions. Each description doc is named in thi
 
 ## Other
 
-For the documentation format, there's still no standards to follow. Make sure it'll be easy to follow for now.
+For the documentation format, there's still no standard to follow. For now, just make sure it is easy to follow.

@@ -64,18 +64,3 @@ class SideBar(CTkFrame):
             self.page3.grid(row=0, column=1, sticky='nsew')
         else:
             self.page3.grid_forget()
-
-
-if __name__ == '__main__':
-    class Tester(CTk):
-        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-            super().__init__(fg_color, **kwargs)
-
-            self.grid_columnconfigure(0, weight=1)
-
-            self.sidebar = SideBar(self)
-            self.sidebar.grid(row=0, column=0, sticky='w')
-
-    app = Tester()
-
-    app.mainloop()

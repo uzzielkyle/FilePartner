@@ -83,25 +83,3 @@ class TreeView(CTkFrame):
         except:
             self.blank_searchbar_message = CTkMessagebox(fg_color='whitesmoke', bg_color='whitesmoke', title='Link Error',
                                                          message='Cannot locate file.', icon='warning', justify='center', font=('Arial', 11), option_focus='option_1', sound=True)
-
-
-if __name__ == '__main__':
-    class Tester(CTk):
-        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-            super().__init__(fg_color, **kwargs)
-
-            self.grid_columnconfigure(0, weight=1)
-
-            self.treeview = TreeView(self)
-            self.treeview.grid(row=0, column=0)
-
-            my_list = ['String 1', 'String 2', 'String 3', 'String 4', 'String 5',
-                       'String 6', 'String 7', 'String 8', 'String 9', 'String 10']
-            my_list_copy = my_list.copy()
-            my_list.extend(my_list_copy)
-
-            self.treeview.display_folders(my_list)
-            self.treeview.display_pdfs([('ouput.pdf', 8)])
-
-    app = Tester()
-    app.mainloop()

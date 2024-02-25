@@ -1,6 +1,6 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
-from components.sidebar import SideBar
+from apps.components.sidebar import SideBar
 from apps.pdf_merger import BulkPdfMerger
 from apps.single_docx_converter import SingleDocxConverter
 from apps.bulk_docx_converter import BulkDocxConverter

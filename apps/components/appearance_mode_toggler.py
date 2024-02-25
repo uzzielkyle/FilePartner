@@ -37,19 +37,3 @@ class AppearanceModeToggler(CTkFrame):
 
     def get(self) -> str:
         print(self.dropdown_menu.get())
-
-
-if __name__ == '__main__':
-    class Tester(CTk):
-        def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
-            super().__init__(fg_color, **kwargs)
-
-            self.grid_columnconfigure(0, weight=1)
-
-            self.appearance_mode_toggler = AppearanceModeToggler(master=self)
-            self.appearance_mode_toggler.grid(
-                row=0, column=0, padx=10, pady=10)
-
-    app = Tester()
-
-    app.mainloop()
