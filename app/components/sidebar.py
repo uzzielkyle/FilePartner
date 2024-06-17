@@ -21,14 +21,15 @@ class SideBar(CTkFrame):
             self, text='PDFMergeXpress', font=CTkFont(size=15, weight='bold'))
         self.sidebar_label.grid(row=0, column=0, pady=20)
 
-        self.nav_frm = CTkFrame(self, corner_radius=corner_radius)
+        self.nav_frm = CTkFrame(
+            self, corner_radius=corner_radius, fg_color="transparent")
         self.nav_frm.grid(row=1, column=0, sticky='ew')
         self.nav_frm.grid_columnconfigure(0, weight=1)
 
         self.bulk_merge_btn = CTkButton(
             self.nav_frm, text='Bulk PDF Merger', height=40, corner_radius=corner_radius, fg_color='transparent', text_color=('gray10', 'gray90'), hover_color=('gray70', 'gray30'), anchor='center', command=lambda: self.select_frame_by_name('bulk_pdf'))
         self.bulk_merge_btn.grid(
-            row=0, column=0, sticky='ew')
+            row=0, column=0, padx=(0, 1), sticky='ew')
 
         self.appearance_mode_toggler = AppearanceModeToggler(master=self)
         self.appearance_mode_toggler.grid(

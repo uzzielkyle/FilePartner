@@ -23,8 +23,15 @@ class TreeView(CTkFrame):
 
         self.configure(width=self.WIDTH)
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
-        self.rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+
+        self.header = CTkFrame(self, fg_color="transparent")
+        self.header.grid(row=0, column=0, columnspan=2,
+                         padx=(10, 0), pady=2, sticky="ew")
+
+        self.header_lbl = CTkLabel(
+            self.header, text="Outputs:", font=CTkFont(size=15, weight='bold'))
+        self.header_lbl.grid(row=0, column=0, sticky="w")
 
         self.style = ttk.Style()
         self.style.configure('mystyle.Treeview.Heading',
@@ -48,21 +55,21 @@ class TreeView(CTkFrame):
         self.tree.heading('Folder', text='Folder', anchor='center')
         self.tree.heading('Pages', text='Pages', anchor='center')
 
-        self.tree.grid(row=0, column=0, padx=(
-            10, 0), pady=(15, 5), sticky='nsew')
+        self.tree.grid(row=1, column=0, padx=(
+            10, 0), pady=5, sticky='nsew')
 
         self.scrollbar = ttk.Scrollbar(
             self, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=self.scrollbar.set)
-        self.scrollbar.grid(row=0, column=1, padx=(0, 10),
-                            pady=(15, 5), sticky='ns')
+        self.scrollbar.grid(row=1, column=1, padx=(0, 10),
+                            pady=5, sticky='ns')
 
         self.tree.bind('<Double-1>', self.on_double_click)
         self.tree.tag_configure('output', background='whitesmoke')
 
         self.clear_btn = CTkButton(
             self, text='Clear', command=self.clear, corner_radius=0)
-        self.clear_btn.grid(row=1, column=0, columnspan=2,
+        self.clear_btn.grid(row=2, column=0, columnspan=2,
                             padx=7.25, pady=(0, 5), sticky='ew')
 
     def clear(self):
