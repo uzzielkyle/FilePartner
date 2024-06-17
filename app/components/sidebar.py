@@ -1,6 +1,7 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
 from .appearance_mode_toggler import AppearanceModeToggler
+from PIL import Image
 
 
 class SideBar(CTkFrame):
@@ -13,17 +14,27 @@ class SideBar(CTkFrame):
         super().__init__(*args, corner_radius=corner_radius, **kwargs)
 
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(3, weight=1)
 
         self.page1 = page1
 
-        self.sidebar_label = CTkLabel(
-            self, text='PDFMergeXpress', font=CTkFont(size=15, weight='bold'))
-        self.sidebar_label.grid(row=0, column=0, pady=20)
+        self.logo_img = CTkImage(
+            light_image=Image.open('app/assets/img/logo.png'), dark_image=Image.open('app/assets/img/logo.png'), size=(100, 100))
+        self.logo_img_lbl = CTkLabel(self, text='', image=self.logo_img)
+        self.logo_img_lbl.grid(row=0, column=0, pady=(20, 5))
+
+        self.sidebar_title_label = CTkLabel(
+            self, text='FilePartner', font=CTkFont(size=15, weight='bold'))
+        self.sidebar_title_label.grid(row=1, column=0)
+
+        self.sidebar_subtitle_label = CTkLabel(
+            self, text='Your Lifetime Partner for Digital Files', font=CTkFont(size=12, weight='normal'))
+        self.sidebar_subtitle_label.grid(
+            row=2, column=0, pady=(0, 20), padx=10)
 
         self.nav_frm = CTkFrame(
             self, corner_radius=corner_radius, fg_color="transparent")
-        self.nav_frm.grid(row=1, column=0, sticky='ew')
+        self.nav_frm.grid(row=3, column=0, sticky='ew')
         self.nav_frm.grid_columnconfigure(0, weight=1)
 
         self.bulk_merge_btn = CTkButton(

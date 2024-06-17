@@ -9,9 +9,10 @@ class App(CTk):
     def __init__(self, fg_color: str | Tuple[str, str] | None = None, **kwargs):
         super().__init__(fg_color, **kwargs)
 
-        self.title('PDFMergeXpress')
-        self.geometry('750x310')
-        self.minsize(750, 300)
+        self.wm_iconbitmap('app/assets/img/logo.ico')
+        self.title('FilePartner')
+        self.geometry('780x340')
+        self.minsize(750, 330)
 
         with open("app/config.json") as config:
             config = json.load(config)
