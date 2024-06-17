@@ -1,18 +1,18 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
-from utils.docx_to_pdf import DocxConverter
-from utils.pdf_merger import LogicHandler
+from ..utils.pdf_merger import LogicHandler
 from CTkMessagebox import CTkMessagebox
 from threading import Thread
 import os
 
 
-class Converter(CTkFrame):
+class Merger(CTkFrame):
     WIDTH: int = 600
     HEIGHT: int = 50
 
     def __init__(self, *args,
                  get_path_func,
+                 clear_search_func,
                  bg_color: str | Tuple[str, str] = 'transparent',
                  fg_color: str | Tuple[str, str] = 'transparent',
                  corner_radius: int = 0,
@@ -20,10 +20,10 @@ class Converter(CTkFrame):
         super().__init__(*args, bg_color=bg_color, fg_color=fg_color,
                          corner_radius=corner_radius, **kwargs)
 
-        self.docx_converter = DocxConverter()
         self.logic_handler = LogicHandler()
 
         self.get_path = get_path_func
+        self.clear_search = clear_search_func
 
         self.treeview_connection = None
 
@@ -38,12 +38,12 @@ class Converter(CTkFrame):
         self.progress_bar.configure(mode='indeterminate')
 
         # self.merge_btn = CTkButton(self, text='Merge', width=90, corner_radius=corner_radius, command=lambda: self.merge())
-        self.convert_btn = CTkButton(self, text='Convert', width=90, corner_radius=corner_radius,
-                                     command=lambda: Thread(target=self.convert).start())
-        self.convert_btn.grid(row=0, column=2, padx=(20, 0),
-                              pady=(0, 5), sticky='ew')
+        self.merge_btn = CTkButton(self, text='Merge', width=90, corner_radius=corner_radius,
+                                   command=lambda: Thread(target=self.merge).start())
+        self.merge_btn.grid(row=0, column=2, padx=(20, 0),
+                            pady=(0, 5), sticky='ew')
 
-    def convert(self) -> None:
+    def merge(self) -> None:
         try:
             folder_path = self.get_path()
 
@@ -72,7 +72,8 @@ class Converter(CTkFrame):
 
                 return
 
-            outputs = self.docx_converter.bulk_conversion(folder_path)
+            outputs = self.logic_handler.deep_merging(
+                main_path=folder_path, dirs=roots_not_empty)
 
             if not outputs:
                 self.no_merging_message = CTkMessagebox(fg_color='whitesmoke', bg_color='whitesmoke', title='No Merging Happened',
@@ -81,6 +82,8 @@ class Converter(CTkFrame):
                 self.idle_state()
 
                 return
+
+            self.display_outputs(values=outputs)
 
             self.idle_state()
 
@@ -97,3 +100,7 @@ class Converter(CTkFrame):
     def working_state(self):
         self.progress_bar.start()
         self.merge_btn.configure(state='disabled')
+
+    def set_treeview_connection(self, clear,  display_outputs):
+        self.clear_treeview = clear
+        self.display_outputs = display_outputs

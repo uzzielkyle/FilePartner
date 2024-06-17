@@ -4,7 +4,7 @@ import os
 import glob
 
 
-class PdfMerger:
+class LogicHandler:
     def __init__(self) -> None:
         pass
 

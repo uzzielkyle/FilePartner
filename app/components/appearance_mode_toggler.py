@@ -1,5 +1,6 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
+import json
 
 
 class AppearanceModeToggler(CTkFrame):
@@ -17,7 +18,11 @@ class AppearanceModeToggler(CTkFrame):
 
         self.modes_list = ['System', 'Dark', 'Light']
 
-        self.current_mode_var = StringVar(value='System')
+        with open("app/config.json") as config:
+            config = json.load(config)
+            appearance_mode = config["appearanceMode"]
+
+        self.current_mode_var = StringVar(value=appearance_mode)
 
         self.widget_label = CTkLabel(
             self, text='Appearance Mode', anchor='center')
@@ -31,9 +36,12 @@ class AppearanceModeToggler(CTkFrame):
     def set(self, choice) -> None:
         try:
             set_appearance_mode(choice)
+            with open("app/config.json") as config:
+                new_config = json.load(config)
+                new_config["appearanceMode"] = choice
+
+            with open("app/config.json", mode="w") as config:
+                config.write(json.dumps(new_config))
 
         except ValueError:
             return
-
-    def get(self) -> str:
-        print(self.dropdown_menu.get())
