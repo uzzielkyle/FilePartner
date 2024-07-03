@@ -3,6 +3,8 @@ from customtkinter import *
 from .appearance_mode_toggler import AppearanceModeToggler
 from PIL import Image
 
+basedir = os.path.dirname(__file__)
+
 
 class SideBar(CTkFrame):
     WIDTH = 50
@@ -13,13 +15,24 @@ class SideBar(CTkFrame):
                  **kwargs):
         super().__init__(*args, corner_radius=corner_radius, **kwargs)
 
+        # Function to get the correct path to the resource
+        def resource_path(relative_path):
+            """ Get absolute path to resource, works for dev and for PyInstaller """
+            try:
+                # PyInstaller creates a temp folder and stores path in _MEIPASS
+                base_path = sys._MEIPASS
+            except AttributeError:
+                base_path = os.path.abspath(".")
+
+            return os.path.join(base_path, relative_path)
+
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(3, weight=1)
 
         self.page1 = page1
 
         self.logo_img = CTkImage(
-            light_image=Image.open('app/assets/img/logo.png'), dark_image=Image.open('app/assets/img/logo.png'), size=(100, 100))
+            light_image=Image.open(resource_path('app/assets/img/logo.png')), dark_image=Image.open(resource_path('app/assets/img/logo.png')), size=(100, 100))
         self.logo_img_lbl = CTkLabel(self, text='', image=self.logo_img)
         self.logo_img_lbl.grid(row=0, column=0, pady=(20, 5))
 

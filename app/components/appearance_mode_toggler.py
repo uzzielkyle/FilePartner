@@ -1,6 +1,8 @@
 from typing import Optional, Tuple, Union
 from customtkinter import *
 import json
+import shutil
+from appdirs import user_data_dir
 
 
 class AppearanceModeToggler(CTkFrame):
@@ -18,7 +20,9 @@ class AppearanceModeToggler(CTkFrame):
 
         self.modes_list = ['System', 'Dark', 'Light']
 
-        with open("app/config.json") as config:
+        self.config_path = self.get_config_path()
+
+        with open(self.resource_path("app/config.json")) as config:
             config = json.load(config)
             appearance_mode = config["appearanceMode"]
 
@@ -35,13 +39,49 @@ class AppearanceModeToggler(CTkFrame):
 
     def set(self, choice) -> None:
         try:
-            set_appearance_mode(choice)
-            with open("app/config.json") as config:
+            self.update_appearance_mode(choice)
+            with open(self.resource_path("app/config.json")) as config:
                 new_config = json.load(config)
                 new_config["appearanceMode"] = choice
 
-            with open("app/config.json", mode="w") as config:
+            with open(self.resource_path("app/config.json"), mode="w") as config:
                 config.write(json.dumps(new_config))
 
         except ValueError:
             return
+
+    @staticmethod
+    # Function to get the correct path to the resource
+    def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except AttributeError:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
+
+    def get_config_path(self):
+        """ Ensure the config file is in a writable location and return its path. """
+        user_data_path = user_data_dir("FilePartner", "UzzielKyleYnciong")
+        os.makedirs(user_data_path, exist_ok=True)
+        config_path = os.path.join(user_data_path, "config.json")
+
+        if not os.path.exists(config_path):
+            shutil.copyfile(self.resource_path("app/config.json"), config_path)
+
+        return config_path
+
+    def save_config(self, config):
+        """ Save the given config to the writable config path. """
+        with open(self.config_path, 'w') as config_file:
+            json.dump(config, config_file, indent=4)
+
+    def update_appearance_mode(self, mode):
+        """ Update appearance mode in the config file and apply it. """
+        with open(self.config_path) as config_file:
+            config = json.load(config_file)
+        config["appearanceMode"] = mode
+        self.save_config(config)
+        set_appearance_mode(mode)

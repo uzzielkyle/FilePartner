@@ -19,11 +19,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/UzziKyle/PDFMergeXpress">
-    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
-    <h1>{INSERT LOGO HERE}</h1>
+    <img src="app/assets/img/logo.png" alt="Logo" width="150" height="150">
+    <h3 align="center" style="color: black;">FilePartner</h3>
   </a>
-
-<h3 align="center">PDFMergeXpress (PMX)</h3>
 
   <p align="center">
     A handy tool to help busy humans with their document problems.
@@ -71,9 +69,9 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
-Currently, **PDFMergeXpress** is an app that lets you merge multiple PDFs at once, from the root directory to its deepest sub-directories.
+Currently, **FilePartner** is an app that lets you merge multiple PDFs at once, from the root directory to its deepest sub-directories.
 
-It was originally made to solve a specific problem in the accreditation process at Palawan State University. This problem was the merging of numerous PDF files. No optimal solution was found on the internet, hence this project was commenced.
+It was originally made to solve the problem of merging numerous PDF files during the accreditation process at Palawan State University. No optimal solution was found on the internet, hence this project was commenced.
 
 The project has already had its first version and successfully helped school staff. It is now in the phase of adding more useful features.
 
@@ -82,6 +80,7 @@ The project has already had its first version and successfully helped school sta
 ### Built With
 
 [![Python][python]][python_url]
+[![CustomTkinter][customtkinter]][customtkinter_url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,7 +92,7 @@ The project has already had its first version and successfully helped school sta
 
 1. Download the latest version [here](https://github.com/UzziKyle/PDFMergeXpress/releases/tag/v1.0.0).
 2. Run the installer and follow everything through.
-3. Enjoy using **PDFMergeXpress**!
+3. Enjoy using **FilePartner**!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -109,14 +108,15 @@ To be updated.
 
 ## Roadmap
 
-- [ ] **New appearance**
-  - [ ] Change of name
+- [x] **New appearance**
+  - [x] Change of name
   - [ ] Typography
-  - [ ] Color palette
-  - [ ] Custom logo
-- [ ] **Docx to PDF conversion page**
+  - [x] Color palette
+  - [x] Custom logo
+- [ ] **Docx to PDF converter**
   - [ ] Individual file
   - [ ] Bulk files
+- [ ] **Image to PDF converter**
 - [ ] **Documentations**
 
 See the [open issues](https://github.com/UzziKyle/PDFMergeXpress/issues) for a full list of proposed features (and known issues).
@@ -154,7 +154,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Acknowledgments
 
-- [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) by [TomSchimansky](https://github.com/TomSchimansky)
+- [CustomTkinter]([customtkinter_url]) by [TomSchimansky](https://github.com/TomSchimansky)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,6 +171,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [issues-url]: https://github.com/UzziKyle/PDFMergeXpress/issues
 [license-shield]: https://img.shields.io/github/license/UzziKyle/PDFMergeXpress.svg?style=for-the-badge
 [license-url]: https://github.com/UzziKyle/PDFMergeXpress/blob/master/LICENSE.txt
-[product-screenshot]: assets/img/docs/screenshot1-development.png
+[product-screenshot]: docs/assets/img/product_screenshot.png
 [python]: https://img.shields.io/badge/python-000000?style=for-the-badge&logo=python&logoColor=white
 [python_url]: https://www.python.org/
+[customtkinter]: https://img.shields.io/badge/customtkinter-blue?style=for-the-badge
+[customtkinter_url]: https://github.com/TomSchimansky/CustomTkinter
